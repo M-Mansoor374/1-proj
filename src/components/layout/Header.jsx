@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { useTheme } from '../../context/ThemeContext';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentSection, setCurrentSection] = useState('home');
-  const { isHeaderDark } = useTheme();
 
   // Handle scroll for navbar background
   useEffect(() => {
@@ -70,9 +68,7 @@ const Header = () => {
       {/* Main Navigation Bar */}
       <nav className={`sticky top-0 transition-all duration-500 ${
         isScrolled 
-          ? isHeaderDark 
-            ? 'bg-white/95 backdrop-blur-md shadow-2xl border-b border-white/20' 
-            : 'bg-blue-900/95 backdrop-blur-md shadow-2xl border-b border-blue-700/20'
+          ? 'bg-white/95 backdrop-blur-md shadow-2xl border-b border-white/20' 
           : 'bg-transparent'
       }`}>
                   <div className="container-custom">
@@ -105,12 +101,8 @@ const Header = () => {
                   onClick={() => scrollToSection(item.section)}
                   className={`relative font-medium text-sm lg:text-base transition-all duration-300 ${
                     isActive(item.section)
-                      ? isHeaderDark 
-                        ? 'text-white' 
-                        : 'text-blue-200'
-                      : isHeaderDark 
-                        ? 'text-white/80 hover:text-white' 
-                        : 'text-blue-100 hover:text-blue-200'
+                      ? 'text-gray-900' 
+                      : 'text-gray-700 hover:text-gray-900'
                   }`}
                   whileHover={{ y: -2 }}
                 >
@@ -118,11 +110,7 @@ const Header = () => {
                   {isActive(item.section) && (
                     <motion.div
                       layoutId="activeTab"
-                      className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
-                        isHeaderDark 
-                          ? 'bg-white' 
-                          : 'bg-gradient-to-r from-blue-400 to-blue-600'
-                      }`}
+                      className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gray-900`}
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
@@ -135,11 +123,7 @@ const Header = () => {
             <div className="flex items-center">
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`lg:hidden p-2.5 sm:p-3 rounded-lg transition-all duration-300 shadow-lg ${
-                  isHeaderDark 
-                    ? 'bg-white/20 text-white hover:bg-white/30' 
-                    : 'bg-blue-800/20 text-blue-100 hover:bg-blue-800/30'
-                }`}
+                className={`lg:hidden p-2.5 sm:p-3 rounded-lg transition-all duration-300 shadow-lg bg-gray-200/50 text-gray-700 hover:bg-gray-300/50`}
                 aria-label="Toggle menu"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -161,11 +145,7 @@ const Header = () => {
               height: isOpen ? 'auto' : 0
             }}
             transition={{ duration: 0.4 }}
-            className={`lg:hidden backdrop-blur-md border-t overflow-hidden rounded-b-lg shadow-xl ${
-              isHeaderDark 
-                ? 'bg-white/95 border-white/20' 
-                : 'bg-blue-900/95 border-blue-700/20'
-            }`}
+            className={`lg:hidden backdrop-blur-md border-t overflow-hidden rounded-b-lg shadow-xl bg-white/95 border-gray-200/50`}
           >
             <div className="py-4 space-y-2">
               {navItems.map((item) => (
@@ -174,12 +154,8 @@ const Header = () => {
                   onClick={() => scrollToSection(item.section)}
                   className={`block w-full text-left px-4 py-3 font-medium transition-all duration-300 rounded-lg ${
                     isActive(item.section)
-                      ? isHeaderDark 
-                        ? 'text-black bg-white/90 border-l-4 border-white' 
-                        : 'text-blue-900 bg-blue-200/90 border-l-4 border-blue-400'
-                      : isHeaderDark 
-                        ? 'text-white hover:text-black hover:bg-white/20' 
-                        : 'text-blue-100 hover:text-blue-200 hover:bg-blue-800/20'
+                      ? 'text-gray-900 bg-gray-100/90 border-l-4 border-gray-400' 
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/50'
                   }`}
                   whileHover={{ x: 10 }}
                 >
